@@ -20,26 +20,26 @@ along with wb-csr-aes-ctr-256.  If not, see <http://www.gnu.org/licenses/>.
 `include "aes_ctr_256.vh"
 
 module aes_top #(
-	parameter csr_addr = 4'h0
+  parameter csr_addr = 4'h0
 ) (
   input sys_clk,
   input sys_rst,
 
   // CSR bus
-	input [13:0] csr_a,
-	input csr_we,
-	input [31:0] csr_di,
-	output reg [31:0] csr_do,
+  input [13:0] csr_a,
+  input csr_we,
+  input [31:0] csr_di,
+  output reg [31:0] csr_do,
 
   // Wishbone bus
-	input [31:0] wb_adr_i,
-	output reg [31:0] wb_dat_o,
-	input [31:0] wb_dat_i,
-	input [3:0] wb_sel_i,
-	input wb_stb_i,
-	input wb_cyc_i,
-	output reg wb_ack_o,
-	input wb_we_i,
+  input [31:0] wb_adr_i,
+  output reg [31:0] wb_dat_o,
+  input [31:0] wb_dat_i,
+  input [3:0] wb_sel_i,
+  input wb_stb_i,
+  input wb_cyc_i,
+  output reg wb_ack_o,
+  input wb_we_i,
 
   // IRQ
   output irq
@@ -82,10 +82,10 @@ always @(posedge sys_clk) begin
     init;
   end else begin
     // CSR
-		csr_do <= 32'd0;
+    csr_do <= 32'd0;
     aes_start <= 1'b0;
-		if (csr_selected) begin
-			case (csr_a[9:0])
+    if (csr_selected) begin
+      case (csr_a[9:0])
         `AES_CSR_STAT: csr_do <= {31'b0, event_end};
         `AES_CSR_CTRL: csr_do <= {30'b0, aes_start, irq_en};
         `AES_CSR_KEY0: csr_do <= key[ 31:  0];
@@ -100,8 +100,8 @@ always @(posedge sys_clk) begin
         `AES_CSR_IV_0: csr_do <= iv[63:32];
         `AES_CSR_IV_1: csr_do <= iv[95:64];
       endcase
-			if (csr_we) begin
-				case (csr_a[9:0])
+      if (csr_we) begin
+        case (csr_a[9:0])
           `AES_CSR_STAT: begin
             /* write one to clear */
             if(csr_di[0])
@@ -324,76 +324,76 @@ wire [3:0] write_m_web [3:0];
 genvar ram_index;
 generate for (ram_index=0; ram_index < 4; ram_index=ram_index+1)
 begin: gen_ram
-	RAMB36 #(
-		.WRITE_WIDTH_A(36),
-		.READ_WIDTH_A(36),
-		.WRITE_WIDTH_B(36),
-		.READ_WIDTH_B(36),
-		.DOA_REG(0),
-		.DOB_REG(0),
-		.SIM_MODE("SAFE"),
-		.INIT_A(9'h000),
-		.INIT_B(9'h000),
-		.WRITE_MODE_A("WRITE_FIRST"),
-		.WRITE_MODE_B("WRITE_FIRST")
-	) read_ram (
-		.DIA(read_m_dia[ram_index]),
-		.DIPA(4'h0),
-		.DOA(read_m_doa[ram_index]),
-		.ADDRA({3'b0, read_m_addra[ram_index], 5'b0}),
-		.WEA(read_m_wea[ram_index]),
-		.ENA(1'b1),
-		.CLKA(sys_clk),
-		
-		.DIB(read_m_dib[ram_index]),
-		.DIPB(4'h0),
-		.DOB(read_m_dob[ram_index]),
-		.ADDRB({3'b0, read_m_addrb[ram_index], 5'b0}),
-		.WEB(read_m_web[ram_index]),
-		.ENB(1'b1),
-		.CLKB(sys_clk),
+  RAMB36 #(
+    .WRITE_WIDTH_A(36),
+    .READ_WIDTH_A(36),
+    .WRITE_WIDTH_B(36),
+    .READ_WIDTH_B(36),
+    .DOA_REG(0),
+    .DOB_REG(0),
+    .SIM_MODE("SAFE"),
+    .INIT_A(9'h000),
+    .INIT_B(9'h000),
+    .WRITE_MODE_A("WRITE_FIRST"),
+    .WRITE_MODE_B("WRITE_FIRST")
+  ) read_ram (
+    .DIA(read_m_dia[ram_index]),
+    .DIPA(4'h0),
+    .DOA(read_m_doa[ram_index]),
+    .ADDRA({3'b0, read_m_addra[ram_index], 5'b0}),
+    .WEA(read_m_wea[ram_index]),
+    .ENA(1'b1),
+    .CLKA(sys_clk),
+    
+    .DIB(read_m_dib[ram_index]),
+    .DIPB(4'h0),
+    .DOB(read_m_dob[ram_index]),
+    .ADDRB({3'b0, read_m_addrb[ram_index], 5'b0}),
+    .WEB(read_m_web[ram_index]),
+    .ENB(1'b1),
+    .CLKB(sys_clk),
 
-		.REGCEA(1'b0),
-		.REGCEB(1'b0),
-		
-		.SSRA(1'b0),
-		.SSRB(1'b0)
-	);
-	RAMB36 #(
-		.WRITE_WIDTH_A(36),
-		.READ_WIDTH_A(36),
-		.WRITE_WIDTH_B(36),
-		.READ_WIDTH_B(36),
-		.DOA_REG(0),
-		.DOB_REG(0),
-		.SIM_MODE("SAFE"),
-		.INIT_A(9'h000),
-		.INIT_B(9'h000),
-		.WRITE_MODE_A("WRITE_FIRST"),
-		.WRITE_MODE_B("WRITE_FIRST")
-	) write_ram (
-		.DIA(write_m_dia[ram_index]),
-		.DIPA(4'h0),
-		.DOA(write_m_doa[ram_index]),
-		.ADDRA({3'b0, write_m_addra[ram_index], 5'b0}),
-		.WEA(write_m_wea[ram_index]),
-		.ENA(1'b1),
-		.CLKA(sys_clk),
-		
-		.DIB(write_m_dib[ram_index]),
-		.DIPB(4'h0),
-		.DOB(write_m_dob[ram_index]),
-		.ADDRB({3'b0, write_m_addrb[ram_index], 5'b0}),
-		.WEB(write_m_web[ram_index]),
-		.ENB(1'b1),
-		.CLKB(sys_clk),
+    .REGCEA(1'b0),
+    .REGCEB(1'b0),
+    
+    .SSRA(1'b0),
+    .SSRB(1'b0)
+  );
+  RAMB36 #(
+    .WRITE_WIDTH_A(36),
+    .READ_WIDTH_A(36),
+    .WRITE_WIDTH_B(36),
+    .READ_WIDTH_B(36),
+    .DOA_REG(0),
+    .DOB_REG(0),
+    .SIM_MODE("SAFE"),
+    .INIT_A(9'h000),
+    .INIT_B(9'h000),
+    .WRITE_MODE_A("WRITE_FIRST"),
+    .WRITE_MODE_B("WRITE_FIRST")
+  ) write_ram (
+    .DIA(write_m_dia[ram_index]),
+    .DIPA(4'h0),
+    .DOA(write_m_doa[ram_index]),
+    .ADDRA({3'b0, write_m_addra[ram_index], 5'b0}),
+    .WEA(write_m_wea[ram_index]),
+    .ENA(1'b1),
+    .CLKA(sys_clk),
+    
+    .DIB(write_m_dib[ram_index]),
+    .DIPB(4'h0),
+    .DOB(write_m_dob[ram_index]),
+    .ADDRB({3'b0, write_m_addrb[ram_index], 5'b0}),
+    .WEB(write_m_web[ram_index]),
+    .ENB(1'b1),
+    .CLKB(sys_clk),
 
-		.REGCEA(1'b0),
-		.REGCEB(1'b0),
-		
-		.SSRA(1'b0),
-		.SSRB(1'b0)
-	);
+    .REGCEA(1'b0),
+    .REGCEB(1'b0),
+    
+    .SSRA(1'b0),
+    .SSRB(1'b0)
+  );
 end
 endgenerate
 
@@ -484,7 +484,7 @@ assign write_m_wea[3] = (wb_en & wb_we_i &  wb_adr_i[3] & ~wb_adr_i[2] &
 // Read
 always @(*) begin
   if (sys_rst == 1'b1) begin
-	  wb_dat_o = 32'b0;
+    wb_dat_o = 32'b0;
   end else begin
     // Read memory
     if (~wb_adr_i[12]) begin
@@ -498,13 +498,13 @@ end
 
 initial wb_ack_o <= 1'b0;
 always @(posedge sys_clk) begin
-	if(sys_rst)
-		wb_ack_o <= 1'b0;
-	else begin
-		wb_ack_o <= 1'b0;
-		if(wb_en & ~wb_ack_o)
-			wb_ack_o <= 1'b1;
-	end
+  if(sys_rst)
+    wb_ack_o <= 1'b0;
+  else begin
+    wb_ack_o <= 1'b0;
+    if(wb_en & ~wb_ack_o)
+      wb_ack_o <= 1'b1;
+  end
 end
 
 endmodule

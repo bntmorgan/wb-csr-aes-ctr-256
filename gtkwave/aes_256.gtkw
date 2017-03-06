@@ -1,0 +1,161 @@
+[*]
+[*] GTKWave Analyzer v3.3.79 (w)1999-2017 BSI
+[*] Mon Feb 13 14:19:41 2017
+[*]
+[dumpfile] "/home/bmorgan/documents/laas/eric/eric/binary/cores/aes_ctr_256/aes_ctr_256_top.sim.vcd"
+[dumpfile_mtime] "Mon Feb 13 14:16:28 2017"
+[dumpfile_size] 14199623
+[savefile] "/home/bmorgan/documents/laas/eric/eric/gtkwave/aes_256.gtkw"
+[timestart] 814410
+[size] 1918 1178
+[pos] -1 -1
+*-13.362850 836950 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] main.
+[treeopen] main.aes.
+[treeopen] main.aes.gen_ram[0].
+[treeopen] main.aes.gen_ram[0].read_ram.INT_RAMB.
+[treeopen] main.aes.gen_ram[1].
+[treeopen] main.aes.gen_ram[2].
+[treeopen] main.aes.gen_ram[3].
+[treeopen] main.aes.gen_ram[3].write_ram.
+[sst_width] 229
+[signals_width] 524
+[sst_expanded] 1
+[sst_vpaned_height] 190
+@800200
+-system
+@28
+main.sys_clk
+main.sys_rst
+@1000200
+-system
+@c00200
+-csr
+@22
+main.aes.csr_a[13:0]
+main.aes.csr_di[31:0]
+main.aes.csr_do[31:0]
+@28
+main.aes.csr_selected
+main.aes.csr_we
+@1401200
+-csr
+@c00200
+-wishbone
+@28
+main.aes.wb_ack_o
+@22
+main.aes.wb_adr_i[31:0]
+@28
+main.aes.wb_cyc_i
+@22
+main.aes.wb_dat_i[31:0]
+main.aes.wb_dat_o[31:0]
+@28
+main.aes.wb_en
+@22
+main.aes.wb_sel_i[3:0]
+@28
+main.aes.wb_stb_i
+main.aes.wb_we_i
+@1401200
+-wishbone
+@c00200
+-aes read
+@22
+main.aes.\read_m_dib[0][31:0]
+main.aes.\read_m_dib[1][31:0]
+main.aes.\read_m_dib[2][31:0]
+main.aes.\read_m_dib[3][31:0]
+main.aes.\read_m_dob[0][31:0]
+main.aes.\read_m_dob[1][31:0]
+main.aes.\read_m_dob[2][31:0]
+main.aes.\read_m_dob[3][31:0]
+main.aes.\read_m_web[0][3:0]
+main.aes.\read_m_web[1][3:0]
+main.aes.\read_m_web[2][3:0]
+main.aes.\read_m_web[3][3:0]
+@1401200
+-aes read
+@800200
+-aes write
+@22
+main.aes.\write_m_dib[0][31:0]
+main.aes.\write_m_dib[1][31:0]
+main.aes.\write_m_dib[2][31:0]
+main.aes.\write_m_dib[3][31:0]
+main.aes.\write_m_dob[0][31:0]
+main.aes.\write_m_dob[1][31:0]
+main.aes.\write_m_dob[2][31:0]
+main.aes.\write_m_dob[3][31:0]
+main.aes.\write_m_web[0][3:0]
+main.aes.\write_m_web[1][3:0]
+main.aes.\write_m_web[2][3:0]
+main.aes.\write_m_web[3][3:0]
+@1000200
+-aes write
+@800200
+-AES
+@22
+main.aes.key[255:0]
+@28
+main.aes.irq
+main.aes.event_end
+main.aes.sm
+@821
+main.aes.mem_read_dr[127:0]
+@22
+main.aes.mem_write_dw[127:0]
+main.aes.mem_read_a[7:0]
+main.aes.mem_write_a[7:0]
+main.aes.out[127:0]
+main.aes.state[127:0]
+main.aes.cpt_state[7:0]
+@1000200
+-AES
+@c00200
+-block ram write
+-Whishbone
+@22
+main.aes.gen_ram[0].write_ram.ADDRA[15:0]
+main.aes.gen_ram[0].write_ram.DIA[31:0]
+main.aes.gen_ram[0].write_ram.DOA[31:0]
+main.aes.gen_ram[0].write_ram.WEA[3:0]
+main.aes.gen_ram[1].write_ram.ADDRA[15:0]
+main.aes.gen_ram[1].write_ram.DIA[31:0]
+main.aes.gen_ram[1].write_ram.DOA[31:0]
+main.aes.gen_ram[1].write_ram.WEA[3:0]
+main.aes.gen_ram[2].write_ram.ADDRA[15:0]
+main.aes.gen_ram[2].write_ram.DIA[31:0]
+main.aes.gen_ram[2].write_ram.DOA[31:0]
+main.aes.gen_ram[2].write_ram.WEA[3:0]
+main.aes.gen_ram[3].write_ram.ADDRA[15:0]
+main.aes.gen_ram[3].write_ram.DIA[31:0]
+main.aes.gen_ram[3].write_ram.DOA[31:0]
+main.aes.gen_ram[3].write_ram.WEA[3:0]
+@1401200
+-Whishbone
+@c00200
+-AES
+@22
+main.aes.gen_ram[0].write_ram.ADDRB[15:0]
+main.aes.gen_ram[0].write_ram.DIB[31:0]
+main.aes.gen_ram[0].write_ram.DOB[31:0]
+main.aes.gen_ram[0].write_ram.WEB[3:0]
+main.aes.gen_ram[1].write_ram.ADDRB[15:0]
+main.aes.gen_ram[1].write_ram.DIB[31:0]
+main.aes.gen_ram[1].write_ram.DOB[31:0]
+main.aes.gen_ram[1].write_ram.WEB[3:0]
+main.aes.gen_ram[2].write_ram.ADDRB[15:0]
+main.aes.gen_ram[2].write_ram.DIB[31:0]
+main.aes.gen_ram[2].write_ram.DOB[31:0]
+main.aes.gen_ram[2].write_ram.WEB[3:0]
+main.aes.gen_ram[3].write_ram.ADDRB[15:0]
+main.aes.gen_ram[3].write_ram.DIB[31:0]
+main.aes.gen_ram[3].write_ram.DOB[31:0]
+main.aes.gen_ram[3].write_ram.WEB[3:0]
+@1401200
+-AES
+-block ram write
+[pattern_trace] 1
+[pattern_trace] 0

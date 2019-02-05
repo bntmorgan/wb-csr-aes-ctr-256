@@ -5,8 +5,6 @@ can be easily modified to a RAM core, containing RAM block inferrable code.
 The user interface is quite simple. You can configure the core parameters with
 the CSR bus (AES key, IV, command and status registers). The wishbone part of
 the core exposes two RAM regions containing the clear or the encryted data.
-Since the core is running in counter mode, it is symmetrical, which means that
-you have the same hardware interface to encryt or decryt your clear /
-encrypted data.
+On shall use the same hardware interface to encryt or decryt (symmetric cipher).
 
 Have fun
